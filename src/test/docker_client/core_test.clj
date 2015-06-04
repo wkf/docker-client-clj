@@ -2,6 +2,7 @@
   (:require [clojure.java.io :as io]
             [clojure.data.json :as json]
             [clojure.test :refer :all]
+            [clj-http.core]
             [clj-http.fake :refer :all]
             [docker-client.core :refer :all]))
 
