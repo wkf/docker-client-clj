@@ -22,11 +22,11 @@ Next, create a docker client. By default, configuration is pulled from the `DOCK
 
 ```clojure
 ;; creates a client with default configuration from the environment
-(def c 
+(def c
   (docker/client))
 
 ;; configuration can also be overriden
-(def c 
+(def c
   (docker/client {:uri "http://localhost:4343"}))
 
 ```
@@ -38,18 +38,18 @@ Once you have a client, you pass it to any of the implemented public functions. 
 (let [{id :id} (create-container!
                  c
                  {:cmd ["sleep" "100"]
-                  :env ["A_VAR=a_value']
+                  :env ["A_VAR=a_value"]
                   :image "debian:wheezy"})]
-                  
+
   ;; inspect its configuration
   (inspect-container c id)
-    
+
   ;; start the container
   (start-container! c id)
-  
+
   ;; stop the container
   (stop-container! c id)
-  
+
   ;; remove the container
   (remove-container! c id))
 ```
@@ -58,7 +58,7 @@ Once you have a client, you pass it to any of the implemented public functions. 
 This project uses core.test, so to run tests:
 
 `lein test`
-  
+
 ## Future
 
 This client is a work in progress; there are many endpoints left to implement. If you have a pressing need for a particular feature, create an issue.
