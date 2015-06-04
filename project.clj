@@ -12,5 +12,6 @@
                  [bidi "1.18.9" :exclusions [org.clojure/clojure]]
                  [camel-snake-kebab "0.3.1" :exclusions [org.clojure/clojure]]]
   :plugins [[lein-cloverage "1.0.6"]]
+  :deploy-repositories [["releases" :clojars]]
   :profiles {:dev {:source-paths ["src/dev"]
                    :dependencies [[clj-http-fake "1.0.1"]]}})
