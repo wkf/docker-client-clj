@@ -1,6 +1,6 @@
 (defproject docker-client "0.1.1-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A Docker client written in Clojure. Supports TLS/HTTPS."
+  :url "https://github.com/wkf/docker-client-clj"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :test-paths ["src/test"]
