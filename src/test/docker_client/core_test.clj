@@ -47,8 +47,8 @@
   (testing "inspect-container"
     (with-fake-routes
       {"http://testhost:1234/containers/12345/json"
-       (fn [req] {:status 200
-                  :body (json/write-str {"Id" "12345"})})}
+       (fn [_] {:status 200
+                :body (json/write-str {"Id" "12345"})})}
       (is (-> {:uri "http://testhost:1234"}
               client
               (inspect-container "12345")
