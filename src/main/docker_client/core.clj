@@ -32,20 +32,38 @@
                            :content-type :json})
                    (merge (:options config)))})))
 
-(defn inspect-container [c id]
-  (rest/get c :container {:container-id id}))
+(defn inspect-container
+  ([c id]
+   (inspect-container c id {}))
+  ([c id options]
+   (rest/get c :container {:container-id id} options)))
 
-(defn start-container! [c id]
-  (rest/post c {} :start-container {:container-id id}))
+(defn start-container!
+  ([c id]
+   (start-container! c id {}))
+  ([c id options]
+   (rest/post c {} :start-container {:container-id id} options)))
 
-(defn stop-container! [c id]
-  (rest/post c {} :stop-container {:container-id id}))
+(defn stop-container!
+  ([c id]
+   (stop-container! c id {}))
+  ([c id options]
+   (rest/post c {} :stop-container {:container-id id} options)))
 
-(defn remove-container! [c id]
-  (rest/delete c :remove-container {:container-id id}))
+(defn remove-container!
+  ([c id]
+   (remove-container! c id {}))
+  ([c id options]
+   (rest/delete c :remove-container {:container-id id} options)))
 
 (defn create-container!
   ([c spec]
-   (rest/post c spec :create-container {}))
-  ([c nm spec]
-   (rest/post c spec :create-container {} {:query-params {"name" nm}})))
+   (rest/post c spec :create-container {} {}))
+  ([c spec options]
+   (let [[spec'
+          options'] (if-let [n (:name spec)]
+                      [(dissoc spec :name)
+                       (update-in options [:query-params] merge {"name" n})]
+                      [spec
+                       options])]
+     (rest/post c spec' :create-container {} options'))))
