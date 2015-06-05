@@ -58,7 +58,7 @@
 
 (defn create-container!
   ([c spec]
-   (rest/post c spec :create-container {} {}))
+   (create-container! c spec {}))
   ([c spec options]
    (let [[spec'
           options'] (if-let [n (:name spec)]
