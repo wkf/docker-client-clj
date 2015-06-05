@@ -1,4 +1,4 @@
-(defproject docker-client "0.1.2"
+(defproject docker-client "0.1.3-SNAPSHOT"
   :description "A Docker client written in Clojure. Supports TLS/HTTPS."
   :url "https://github.com/wkf/docker-client-clj"
   :license {:name "Eclipse Public License"
