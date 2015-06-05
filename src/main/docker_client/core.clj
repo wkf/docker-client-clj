@@ -10,6 +10,52 @@
    :docker-cert-path (System/getenv "DOCKER_CERT_PATH")
    :docker-tls-verify (System/getenv "DOCKER_TLS_VERIFY")})
 
+(def routes
+  ["/"
+   {"auth" :auth
+    "info" :info
+    "_ping" :ping
+    "version" :version
+    "commit" :create-image-from-container
+    "events" :events
+    "build" :build-image
+    "images" {"/get" :dump-images
+              "/load" :load-images
+              "/json" :images
+              "/create" :create-image
+              "/search" :search-images
+              ["/" :image-name] {"" :remove-image
+                                 "/json" :image
+                                 "/history" :image-history
+                                 "/get" :dump-image
+                                 "/tag" :tag-image
+                                 "/push" :push-image}}
+    "containers" {"/json" :containers
+                  "/create" :create-container
+                  ["/" :container-id] {"" :remove-container
+                                       "/top" :container-processes
+                                       "/logs" :container-logs
+                                       "/stats" :container-stats
+                                       "/changes" :container-changes
+                                       "/json" :container
+                                       "/stop" :stop-container
+                                       "/kill" :kill-container
+                                       "/start" :start-container
+                                       "/export" :export-container
+                                       "/resize" :resize-container-tty
+                                       "/restart" :restart-container
+                                       "/rename" :rename-container
+                                       "/pause" :pause-container
+                                       "/unpause" :unpause-container
+                                       "/attach" :attach-to-container
+                                       "/attach/ws" :attach-to-container-ws
+                                       "/exec" :create-exec-in-container
+                                       "/wait" :wait-for-container
+                                       "/copy" :copy-from-container}}
+    "exec" {["/" :exec-id] {"/json" :exec
+                            "/start" :start-exec
+                            "/resize" :resize-exec-tty}}}])
+
 (defn- parse-uri-from-env []
   (-> env :docker-host urish
       (assoc
@@ -22,7 +68,7 @@
   ([config]
    (let [uri (urish (or (:uri config) (parse-uri-from-env)))]
      {:uri uri
-      :routes (-> (or (:routes config) "routes.edn") io/resource slurp edn/read-string)
+      :routes routes
       :options (-> (when (urish/https? uri)
                      (security/options
                        (or (:cert-path config)
