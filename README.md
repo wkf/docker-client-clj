@@ -1,6 +1,6 @@
 # docker-client
 
-[![Build Status](https://secure.travis-ci.org/wkf/docker-client-clj.png)](http://travis-ci.org/wkf/docker-client-clj)
+[![Build Status](https://secure.travis-ci.org/wkf/docker-client-clj.svg)](http://travis-ci.org/wkf/docker-client-clj)
 
 An incomplete Docker remote API client written in Clojure. Supports TLS and API version `1.18`.
 
