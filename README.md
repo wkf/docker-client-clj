@@ -18,14 +18,14 @@ To get started, require the core namespace:
 (require '[docker-client.core :as docker])
 ```
 
-Next, create a docker client. By default, configuration is pulled from the `DOCKER_HOST`, `DOCKER_CERT_PATH` and `DOCKER_VERIFY_TLS` environment variables. If DOCKER_VERIFY_TLS and DOCKER_CERT_PATH are both set, read credentials from disk and use https. This behavior can be overriden by passing configuration to the `docker/client` function:
+Next, create a docker client. By default, configuration is pulled from the `DOCKER_HOST`, `DOCKER_CERT_PATH` and `DOCKER_VERIFY_TLS` environment variables. If `DOCKER_VERIFY_TLS` and `DOCKER_CERT_PATH` are both set, read credentials from disk and use https. This behavior can be overridden by passing configuration to the `docker/client` function:
 
 ```clojure
 ;; creates a client with default configuration from the environment
 (def c
   (docker/client))
 
-;; configuration can also be overriden
+;; configuration can also be overridden
 (def c
   (docker/client {:uri "http://localhost:4343"}))
 
